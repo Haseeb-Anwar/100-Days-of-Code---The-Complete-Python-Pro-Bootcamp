@@ -1,8 +1,48 @@
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
-text = input("Type your message:\n").lower()
-shift = int(input("Type the shift number:\n"))
+direction=''
+
+def encrypt(original_text,shift_amount):
+    result = ""
+    for char in original_text:
+        if char.isalpha():  # only shift letters
+            base = ord('A') if char.isupper() else ord('a')
+            # shift by 2, wrap around using modulo 26
+            result += chr((ord(char) - base + shift_amount) % 26 + base)
+        else:
+            result += char  # keep spaces, punctuation unchanged
+    return result
+
+def decrypt(text,shift_amount):
+    result = ""
+    for char in text:
+        if char.isalpha():  # only shift letters
+            base = ord('A') if char.isupper() else ord('a')
+            # shift by 2, wrap around using modulo 26
+            result += chr((ord(char) - base - shift_amount) % 26 + base)
+        else:
+            result += char  # keep spaces, punctuation unchanged
+    return result
+
+
+
+while direction!='quit':
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt, quit to close:\n").lower()
+
+    if(direction=='encode'):
+        text = input("Type your message:\n").lower()
+        shift = int(input("Type the shift number:\n"))
+        encrypted_text=encrypt(text,shift)
+        print(encrypted_text)
+
+    elif(direction=='decode'):
+        text = input("Type your message:\n").lower()
+        shift = int(input("Type the shift number:\n"))
+        decrypted_text=decrypt(text,shift)
+        print(decrypted_text)
+    elif(direction=='quit'):
+        break
+
 
 
 # TODO-1: Create a function called 'encrypt()' that takes 'original_text' and 'shift_amount' as 2 inputs.

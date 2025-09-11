@@ -1,6 +1,4 @@
 import random
-import hangman_words as hw
-
 
 def print_hangman():
     hangman_logo = r"""
@@ -13,10 +11,10 @@ def print_hangman():
                         __/ |                      
                        |___/                       
     """
-    print(hangman_logo)  # <-- actually print it
+
+
 
 def print_life(lives):
-    # Indexed by lives remaining: 6 (start) ... 0 (game over)
     hangman_stages = [
         # 0 lives left (game over)
         """
@@ -89,53 +87,73 @@ def print_life(lives):
         =========
         """
     ]
+
     print(hangman_stages[lives])
+
+
 
 print_hangman()
 
+word_list = ["aardvark", "baboon", "camel"]
 
-random_word = random.choice(hw.word_list)
+random_word = random.choice(word_list)
 
-lives = 6
-found_word = ["_"] * len(random_word)
-guessed = set()        # track all guesses
-wrong_guesses = set()  # optional: track wrong guesses separately
+life_counter=6
+guess_a_letter=''
+found_word=list(random_word)
+found_word = ["_"] * len(found_word)
 
-print(" ".join(found_word))
-print_life(lives)
+#print(random_word)
+print (found_word)
 
-while lives > 0:
-    guess = input("Guess a letter: ").strip().lower()
-    if not guess:
-        print("Please enter a letter.")
-        continue
-    guess = guess[0]  # take first character only
 
-    if guess in guessed:
-        print(f"You already guessed '{guess}'. Try another letter.")
-        continue
 
-    guessed.add(guess)
-    indexes = [i for i, c in enumerate(random_word) if c == guess]
+
+
+while life_counter>0:
+    print(" ".join(found_word))
+    guess_a_letter = input("Guess a letter: ")
+
+
+
+    indexes = [i for i, c in enumerate(random_word) if c == guess_a_letter]
+
 
     if not indexes:
-        wrong_guesses.add(guess)
-        print(f"'{guess}' is not in the word. You lose a life.")
-        lives -= 1
-        print_life(lives)
+
+        print(f"you guessed: {guess_a_letter}, that's not in a word. you loose a life" )
+        life_counter-=1
+        print(f'life counter: {life_counter}')
+        print(print_life(life_counter))
+
     else:
+
         for i in indexes:
-            found_word[i] = guess
-        print("Nice! " + " ".join(found_word))
+            found_word[i]=guess_a_letter
 
-    print(f"Lives left: {lives}/6")
-    if wrong_guesses:
-        print("Wrong guesses:", " ".join(sorted(wrong_guesses)))
-    print("-" * 50)
 
-    if "_" not in found_word:
-        print("You win! The word was:", random_word)
-        break
+        print(" ".join(found_word))
 
-if lives == 0 and "_" in found_word:
-    print("Game over! The word was:", random_word)
+    print(f"***********************************{life_counter}/6 lives left *****************************************")
+
+
+
+
+
+
+
+
+
+# TODO-1 - Randomly choose a word from the word_list and assign it to a variable called chosen_word. Then print it.
+
+
+
+
+
+# TODO-2 - Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
+
+# TODO-3 - Check if the letter the user guessed (guess) is one of the letters in the chosen_word. Print "Right" if it
+#  is, "Wrong" if it's not.
+
+
+

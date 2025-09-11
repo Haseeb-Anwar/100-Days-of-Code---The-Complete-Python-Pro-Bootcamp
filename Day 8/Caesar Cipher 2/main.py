@@ -4,6 +4,7 @@ direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower
 text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
 
+# already done in task 1
 
 # TODO-1: Create a function called 'decrypt()' that takes 'original_text' and 'shift_amount' as inputs.
 # TODO-2: Inside the 'decrypt()' function, shift each letter of the 'original_text' *backwards* in the alphabet

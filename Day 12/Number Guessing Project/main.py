@@ -15,7 +15,7 @@ elif difficulty=='hard':
     attempts=5
 
 
-for i in range(0,attempts-1):
+for i in range(0,attempts):
     guess = int(input("Guess the number: "))
     if(guess>num):
         print ("Too High!")
@@ -26,5 +26,5 @@ for i in range(0,attempts-1):
         break
     if(i==attempts):
         print("Out of attempts... Try Again")
-    print(f"{attempts-i} Attempts left!!!" )
+    print(f"{attempts-1-i} Attempts left!!!" )
 
